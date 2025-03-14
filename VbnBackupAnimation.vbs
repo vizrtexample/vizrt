@@ -1,38 +1,38 @@
-dim temp as image
-dim c as container
+Dim temp as image
+Dim c as container
 
-sub OnInitParameters()
+Sub OnInitParameters()
     RegisterParameterContainer("Container", "Backup Container")
-	RegisterPushButton( "save", " Save Backup ", 0 )	
-end sub
+    RegisterPushButton("save", " Save Backup ", 0)
+End Sub
 
-sub OnInit()
+Sub OnInit()
     AnimationBackup()
-end sub
+End Sub
 
-sub OnExecAction(buttonId as Integer)
-	if buttonId == 0 then
-		if c.Valid then
-			println "Log: Save Backup"
-	    	c.Texture = this.Texture
-	    	c.Active = false
-	    end if
-	end if
-end sub
+Sub OnExecAction(buttonId as Integer)
+    If buttonId = = 0 Then
+        If c.Valid Then
+            println "Log: Save Backup"
+            c.Texture = this.Texture
+            c.Active = False
+        End If
+    End If
+End Sub
 
-sub OnExecPerField()
-    if this.Texture.Image <> temp then
-       AnimationBackup()
-    end if
-end sub
+Sub OnExecPerField()
+    If this.Texture.Image <> temp Then
+        AnimationBackup()
+    End If
+End Sub
 
-sub OnParameterChanged(parameterName As String)
+Sub OnParameterChanged(parameterName As String)
     AnimationBackup()
-end sub
+End Sub
 
-sub AnimationBackup()
-	c = GetParameterContainer("Container")
+Sub AnimationBackup()
+    c = GetParameterContainer("Container")
     temp = this.Texture.Image
-	System.SendCommand("#" & this.VizId  & "*ANIMATION COPY #" & c.VizId  & "*ANIMATION")
-end Sub
+    System.SendCommand("#" & this.VizId & "*ANIMATION COPY #" & c.VizId & "*ANIMATION")
+End Sub
 
